@@ -1,8 +1,9 @@
 package hiber;
 
 import hiber.config.AppConfig;
+import hiber.dao.UserDao;
 import hiber.model.User;
-import hiber.model.UserCar;
+import hiber.model.Car;
 import hiber.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -16,12 +17,32 @@ public class MainApp {
 
       UserService userService = context.getBean(UserService.class);
 
-      userService.add(new User("User1", "Lastname1", "user1@mail.ru"));
-      userService.add(new User("User2", "Lastname2", "user2@mail.ru"));
-      userService.add(new User("User3", "Lastname3", "user3@mail.ru"));
-      userService.add(new User("User4", "Lastname4", "user4@mail.ru"));
-      userService.add(new User("User5", "Lastname4", "user4@mail.ru").setUserCar(new UserCar("AUDI", 12)));
-      userService.add(new User("User6", "Lastname4", "user4@mail.ru").setUserCar(new UserCar("MERS", 13)));
+      //userService.add(new User("User1", "Lastname1", "user1@mail.ru").setUserCar(new Car("AUDI", 12))); Почему это не работает????
+
+      User user1 = new User("User1", "Lastname1", "user1@mail.ru");
+      User user2 = new User("User2", "Lastname2", "user2@mail.ru");
+      User user3 = new User("User3", "Lastname3", "user3@mail.ru");
+      User user4 = new User("User4", "Lastname4", "user4@mail.ru");
+      Car car1 = new Car("AUDI", 12);
+      Car car2 = new Car("MERS", 13);
+      Car car3 = new Car("KIA", 14);
+      Car car4 = new Car("BMW", 15);
+      user1.setUserCar(car1);
+      user2.setUserCar(car2);
+      user3.setUserCar(car3);
+      user4.setUserCar(car4);
+      userService.add(user1);
+      userService.add(user2);
+      userService.add(user3);
+      userService.add(user4);
+
+      for(Car car : userService.listCars()) {
+         System.out.println(car);
+      }
+
+      userService.findUser("KIA", 14);
+
+
 
       List<User> users = userService.listUsers();
       for (User user : users) {

@@ -21,15 +21,10 @@ public class User {
 
    @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "car_id")
-   private UserCar userCar;
+   private Car userCar;
 
-   public UserCar getUserCar() {
-      return userCar;
-   }
-
-   public UserCar setUserCar(UserCar userCar) {
+   public void setUserCar(Car userCar) {
       this.userCar = userCar;
-      return userCar;
    }
 
    public User() {}
