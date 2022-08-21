@@ -26,19 +26,19 @@ public class UserDaoImp implements UserDao {
    }
 
    @Override
-   public void findUser(String model, int series) {
+   public User findUser(String model, int series) {
       Session session = sessionFactory.getCurrentSession();
+      User user = new User();
       for (Car car : listCars()) {
          if (car.getModel().equals(model) && car.getSeries() == series) {
             long x = car.getId();
             String hql = "from User where id = :paramName";
             Query query = session.createQuery(hql);
             query.setParameter("paramName", x);
-            System.out.println(query.getSingleResult());
-         } else {
-            continue;
+            user = (User) query.getSingleResult();
          }
       }
+      return user;
    }
 
    @Override

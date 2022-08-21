@@ -27,8 +27,8 @@ public class UserServiceImp implements UserService {
 
    @Override
    @Transactional
-   public void findUser(String model, int series) {
-      userDao.findUser(model, series);
+   public User findUser(String model, int series) {
+     return userDao.findUser(model, series);
    }
 
    @Transactional(readOnly = true)
